@@ -35,15 +35,22 @@ export default async function handler(
     // Criptografa a senha
     const hashedPassword = await bcrypt.hash(senha, 10);
 
+    // Verifica se o departamento existe
+    const departamento = await prisma.departamento.findUnique({
+      where: { id: parseInt(departamento_id) }
+    });
+
+    if (!departamento) {
+      return res.status(400).json({ message: 'Departamento não encontrado' });
+    }
+
     // Cria o usuário
     const user = await prisma.user.create({
       data: {
         nome,
         email,
         senha: hashedPassword,
-        departamento: {
-          connect: { id: parseInt(departamento_id) }
-        }
+        departamentoId: parseInt(departamento_id)
       }
     });
 
@@ -53,6 +60,15 @@ export default async function handler(
     return res.status(201).json(userData);
   } catch (error) {
     console.error('Erro no cadastro:', error);
-    return res.status(500).json({ message: 'Erro interno do servidor' });
+    if (error instanceof Error) {
+      return res.status(500).json({
+        success: false,
+        message: error.message
+      });
+    }
+    return res.status(500).json({
+      success: false,
+      message: 'Erro interno do servidor'
+    });
   }
 }

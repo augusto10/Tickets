@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FormInput from '../components/FormInput';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -15,6 +15,11 @@ interface FormErrors {
   [key: string]: string;
 }
 
+interface Departamento {
+  id: string;
+  name: string;
+}
+
 export default function Cadastro() {
   const router = useRouter();
   const [formData, setFormData] = useState<CadastroForm>({
@@ -22,10 +27,31 @@ export default function Cadastro() {
     email: "",
     senha: "",
     confirmPassword: "",
-    departamento_id: "1"
+    departamento_id: ""
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
+  const [departments, setDepartments] = useState<Departamento[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadDepartments = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/departamentos');
+        if (response.ok) {
+          const data = await response.json();
+          setDepartments(data);
+          console.log('Departamentos carregados:', data);
+        }
+      } catch (error) {
+        console.error('Erro ao carregar departamentos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadDepartments();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -103,7 +129,20 @@ export default function Cadastro() {
       router.push('/login');
     } catch (error) {
       console.error('Erro no cadastro:', error);
-      // Aqui você pode mostrar uma mensagem de erro ao usuário
+      if (error instanceof Error) {
+        setErrors({ message: error.message });
+      } else {
+        setErrors({ message: 'Erro desconhecido ao cadastrar' });
+      }
+    } finally {
+      // Limpa o formulário após qualquer erro
+      setFormData({
+        nome: '',
+        email: '',
+        senha: '',
+        confirmPassword: '',
+        departamento_id: '1'
+      });
     }
   };
 
@@ -137,14 +176,25 @@ export default function Cadastro() {
                 name="departamento_id"
                 value={formData.departamento_id}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                disabled={loading}
+                className={`w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                <option value="1">RH</option>
-                <option value="2">Logística</option>
-                <option value="3">Vendas</option>
-                <option value="4">Compras</option>
-                <option value="5">TI</option>
+                <option value="">Selecione um departamento</option>
+                {loading ? (
+                  <option value="">Carregando departamentos...</option>
+                ) : departments.length === 0 ? (
+                  <option value="">Nenhum departamento encontrado</option>
+                ) : (
+                  departments.map((dept) => (
+                    <option key={dept.id} value={dept.id}>
+                      {dept.name}
+                    </option>
+                  ))
+                )}
               </select>
+              {errors.departamento_id && (
+                <p className="text-red-500 text-sm mt-1">{errors.departamento_id}</p>
+              )}
             </div>
           </div>
 
