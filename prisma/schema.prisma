@@ -37,6 +37,7 @@ model Departamento {
 }
 
 model Ticket {
+  @@map("tickets")
   id            Int      @id @default(autoincrement())
   titulo        String
   descricao     String
@@ -48,11 +49,6 @@ model Ticket {
   atendente     User?    @relation("Atendente", fields: [atendenteId], references: [id])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-}
-
-enum TipoUsuario {
-  USUARIO
-  ATENDENTE
 }
 
 enum StatusTicket {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormInput from '../components/FormInput';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -157,17 +157,6 @@ export default function Cadastro() {
             <div>
               <FormInput label="Nome" name="nome" value={formData.nome} onChange={handleChange} />
               {errors.nome && <p className="text-red-500 text-sm mt-1">{errors.nome}</p>}
-            </div>
-            <div>
-              <FormInput label="E-mail" name="email" value={formData.email} onChange={handleChange} />
-              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-            </div>
-            <div>
-              <FormInput label="Senha" name="senha" type="password" value={formData.senha} onChange={handleChange} />
-              {errors.senha && <p className="text-red-500 text-sm mt-1">{errors.senha}</p>}
-            </div>
-            <div>
-              <FormInput label="Confirmar Senha" name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} />
               {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
             </div>
             <div className="mt-4">

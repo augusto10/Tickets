@@ -8,7 +8,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -18,19 +18,25 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["app/*"],
+      "@lib/*": ["lib/*"],
+      "@app/*": ["app/*"],
+      "@contexts/*": ["app/contexts/*"],
+      "@components/*": ["app/components/*"],
+      "@utils/*": ["app/utils/*"]
+    },
     "types": [
       "react",
       "react-dom",
       "node"
     ],
+    "jsxImportSource": "react",
+    "allowSyntheticDefaultImports": true,
     "typeRoots": [
-      "./node_modules/@types"
+      "./node_modules/@types",
+      "./node_modules/.prisma/client"
     ],
     "plugins": [
       {
@@ -39,15 +45,10 @@
     ],
     "strictNullChecks": true
   },
-  "plugins": [
-    {
-      "name": "next"
-    }
-  ],
   "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
+    "src/**/*",
+    "app/**/*",
+    "lib/**/*",
     ".next/types/**/*.ts"
   ],
   "exclude": [

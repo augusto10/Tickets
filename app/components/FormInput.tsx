@@ -1,15 +1,12 @@
-import { Input, InputProps } from "@mantine/core";
 import React from 'react';
+import { Input, InputProps } from "@mantine/core";
 
 interface FormInputProps extends InputProps {
   label: string;
-  name: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   error?: string;
 }
 
-export default function FormInput({ label, error, ...props }: FormInputProps) {
+const FormInput: React.FC<FormInputProps> = ({ label, error, ...props }) => {
   return (
     <Input.Wrapper
       label={label}
@@ -19,4 +16,6 @@ export default function FormInput({ label, error, ...props }: FormInputProps) {
       <Input {...props} />
     </Input.Wrapper>
   );
-}
+};
+
+export default FormInput;
