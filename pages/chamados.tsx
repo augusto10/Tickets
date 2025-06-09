@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
-import ProtectedRoute from '../components/ProtectedRoute';
-import { useAuth } from '../contexts/AuthContext';
+import ProtectedRoute from '@app/components/ProtectedRoute';
+import { useAuth } from '@app/contexts/AuthContext';
 
 const prisma = new PrismaClient();
 
@@ -12,10 +12,19 @@ interface Ticket {
   descricao: string;
   status: string;
   prioridade: string;
+  criadorId: number;
   criador: {
+    id: number;
     nome: string;
+    email: string;
+    senha: string;
+    tipo: string;
+    departamentoId: number;
+    createdAt: Date;
+    updatedAt: Date;
   };
   createdAt: Date;
+  updatedAt: Date;
 }
 
 export default function Chamados() {
@@ -27,7 +36,7 @@ export default function Chamados() {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const tickets = await prisma.Ticket.findMany({
+        const tickets = await prisma.ticket.findMany({
           include: {
             criador: true
           },
@@ -128,5 +137,5 @@ export default function Chamados() {
     </ProtectedRoute>
   );
 }
-}
-}
+
+

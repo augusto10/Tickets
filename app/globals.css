@@ -1,0 +1,305 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@mantine/core/styles.css';
+@import '@mantine/styles/styles.css';
+
+:root {
+  --primary-color: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #3b82f6;
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border: #e2e8f0;
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  --info-color: #3b82f6;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.5;
+}
+
+/* Estilos para formulários */
+input, textarea, select {
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  background-color: var(--surface);
+  color: var(--text-primary);
+  transition: border-color 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+/* Estilos para botões */
+button {
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+button.primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+button.primary:hover {
+  background-color: var(--primary-dark);
+}
+
+button.secondary {
+  background-color: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+button.secondary:hover {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+/* Estilos para cards */
+.card {
+  background-color: var(--surface);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
+  padding: 1rem;
+}
+
+/* Estilos para tabelas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background-color: var(--surface);
+  font-weight: 600;
+}
+
+/* Estilos para alertas */
+.alert {
+  padding: 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+}
+
+.alert.success {
+  background-color: rgba(16, 185, 129, 0.05);
+  color: var(--success-color);
+}
+
+.alert.error {
+  background-color: rgba(239, 68, 68, 0.05);
+  color: var(--error-color);
+}
+
+.alert.warning {
+  background-color: rgba(245, 158, 11, 0.05);
+  color: var(--warning-color);
+}
+
+.alert.info {
+  background-color: rgba(59, 130, 246, 0.05);
+  color: var(--info-color);
+}
+
+/* Estilos para loading spinner */
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spinner {
+  animation: spin 1s linear infinite;
+  height: 1rem;
+  width: 1rem;
+  border: 2px solid white;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
+
+/* Alert styles */
+.alert-info {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  border-color: #bbdefb;
+}
+.alert-success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-color: #c8e6c9;
+}
+.alert-warning {
+  background-color: #fff3e0;
+  color: #f57c00;
+  border-color: #ffe0b2;
+}
+.alert-error {
+  background-color: #ffebee;
+  color: #c62828;
+  border-color: #ffcdd2;
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background-color: #1976d2;
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(30, 136, 229, 0.5);
+}
+
+.btn-secondary {
+  background-color: #f5f5f5;
+  color: #4a5568;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  background-color: #e2e8f0;
+}
+
+.btn-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(245, 245, 245, 0.5);
+}
+
+.btn-outline {
+  border: 1px solid #a0aec0;
+  color: #4a5568;
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+.btn-outline:hover {
+  background-color: #f7fafc;
+}
+
+.btn-outline:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(160, 174, 192, 0.5);
+}
+
+/* Form styles */
+.form-input {
+  display: block;
+  width: 100%;
+  border-radius: 0.25rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.form-input:focus {
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+/* Card styles */
+.card {
+  border-radius: 0.5rem;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+  padding: 1rem 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Table styles */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-header {
+  background-color: #f7fafc;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.table-row {
+  background-color: white;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #2d3748;
+}
+
+/* Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
